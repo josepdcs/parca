@@ -116,7 +116,7 @@ const unitsInCount = {
 
 const knownValueFormatters = {
   bytes: unitsInBytes,
-  nanos: unitsInTime,
+  nanoseconds: unitsInTime,
   count: unitsInCount,
 };
 
