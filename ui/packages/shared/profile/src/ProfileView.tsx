@@ -1,6 +1,4 @@
-import React, {useEffect, useState, useRef} from 'react';
-// import ProfileSVG from './ProfileSVG'
-// import ProfileTop from './ProfileTop'
+import React, {useEffect, useState} from 'react';
 import {CalcWidth} from '@parca/dynamicsize';
 import ProfileIcicleGraph from './ProfileIcicleGraph';
 import {ProfileSource} from './ProfileSource';
@@ -116,14 +114,14 @@ export const ProfileView = ({queryClient, profileSource}: ProfileViewProps): JSX
           link.href = window.URL.createObjectURL(blob);
           link.download = 'profile.pb.gz';
           link.click();
+        } else {
+          console.error(error);
         }
       }
     );
   };
 
-  const resetIcicleGraph = (e: React.MouseEvent<HTMLElement>) => {
-    setCurPath([]);
-  };
+  const resetIcicleGraph = () => setCurPath([]);
 
   const setNewCurPath = (path: string[]) => {
     if (!arrayEquals(curPath, path)) {
