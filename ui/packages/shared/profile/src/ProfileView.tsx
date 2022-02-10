@@ -106,6 +106,10 @@ export const ProfileView = ({queryClient, profileSource}: ProfileViewProps): JSX
         error: ServiceError | null,
         responseMessage: parca_query_v1alpha1_query_pb.QueryResponse | null
       ) => {
+        if (error != null) {
+          console.error('Error while querying', error);
+          return;
+        }
         if (responseMessage !== null) {
           const bytes = responseMessage.getPprof();
           const blob = new Blob([bytes], {type: 'application/octet-stream'});

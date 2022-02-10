@@ -4,6 +4,10 @@ export const capitalize = (a: string): string =>
     .map(p => p[0].toUpperCase() + p.substr(1).toLocaleLowerCase())
     .join(' ');
 
+interface Unit {
+  multiplier: number;
+  symbol: string;
+}
 export interface TimeObject {
   nanos?: number;
   micros?: number;
@@ -122,9 +126,7 @@ const knownValueFormatters = {
 
 export const valueFormatter = (num: number, unit: string, digits: number): string => {
   const absoluteNum = Math.abs(num);
-  const format: Array<{multiplier: number; symbol: string}> = Object.values(
-    knownValueFormatters[unit]
-  );
+  const format: Array<Unit> = Object.values(knownValueFormatters[unit]);
 
   if (format === undefined || format === null) {
     return num.toString();
@@ -137,5 +139,5 @@ export const valueFormatter = (num: number, unit: string, digits: number): strin
       break;
     }
   }
-  return (num / format[i].multiplier).toFixed(digits).replace(rx, '$1') + format[i].symbol;
+  return `${(num / format[i].multiplier).toFixed(digits).replace(rx, '$1')}${format[i].symbol}`;
 };
